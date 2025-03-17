@@ -37,6 +37,37 @@
     </div>
 </div>
 
+<div class="col-12 p-4">
+    <h2 class="text-success">Product Table</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>IsActive</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prop in ProductList)
+            {
+                <tr>
+                    <td>
+                        <input type="text" @bind="prop.Name"/>
+                    </td>
+                    <td>
+                        <input type="number" @bind="prop.Price" />
+                    </td>
+                    <td>
+                        <input type="checkbox" @bind="prop.IsActive" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
 
 @code {
     private string selectedProp = "";
