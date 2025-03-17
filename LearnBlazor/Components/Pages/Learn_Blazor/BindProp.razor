@@ -4,13 +4,22 @@
 Name : @Product.Name
 <br/>
 IsActive : @Product.IsActive
+<br />
+Price: @Product.Price
+
+<br/>
+<input type="number" @bind="@Product.Price" @bind:event="oninput"/>
+Input Price :
+<input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
+
 
 @code {
     Product Product = new()
         {
             Id = 1,
             Name = "Coffee",
-            IsActive = true
+            IsActive = true,
+            Price= 100
         };
 
 }
