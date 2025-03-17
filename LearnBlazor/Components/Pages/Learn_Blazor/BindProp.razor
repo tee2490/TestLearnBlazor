@@ -1,0 +1,18 @@
+﻿@page "/learnblazor/bindprop"
+
+<h3>BindProp</h3>
+Name : @Product.Name
+<br/>
+IsActive : @Product.IsActive
+
+@code {
+    Product Product = new()
+        {
+            Id = 1,
+            Name = "Coffee",
+            IsActive = true
+        };
+
+}
+
+
