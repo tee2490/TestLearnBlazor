@@ -1,47 +1,93 @@
 ﻿@page "/learnblazor/bindprop"
 
-<h3>BindProp</h3>
-Name : @Product.Name
-<br/>
-IsActive : @Product.IsActive
-<br />
-Price: @Product.Price
-<br />
-This Product is : @(Product.IsActive ? "Active" : "InActive")
+<div class="row">
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product Playground</h3>
+        <hr />
 
-<br />
-<input type="checkbox" @bind="@Product.IsActive" />
-<br/>
-Input Price :
-<br />
-<input type="number" @bind="@Product.Price" @bind:event="oninput"/>
-<br />
-<input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
+        IsActive : <input type="checkbox" @bind="@Product.IsActive" /> <br />
+        Input Price :
+        <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
 
-<br />
-<br />
-Product Properties
-<select  @bind="selectedProp">
-    @foreach (var prop in Enum.GetValues(typeof(Days)))
-    {
-        <option value="@prop">@prop</option>
-    }
-</select>
+        <br />
+        <br />
+        Product Properties
+        <select @bind="selectedProp">
+            @foreach (var prop in Product.ProductProperties)
+            {
+                <option value="@prop.Key">@prop.Key</option>
+            }
+        </select>
+    </div>
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product Summary</h3>
+        <hr />
+        Name : @Product.Name <br />
+        IsActive : @Product.IsActive <br />
+        Price: @Product.Price <br />
+        This Product is : @(Product.IsActive ? "Active" : "InActive") <br />
 
-<p>@((int)selectedProp)</p>
+        <br />
+        Selected Prop : @selectedProp
+        @if (!string.IsNullOrEmpty(selectedProp))
+        {
+            <p>Selected Value : @Product.ProductProperties.FirstOrDefault(u => u.Key == selectedProp).Value</p>
+        }
+
+    </div>
+</div>
 
 
 @code {
-    //private string selectedProp = "";
-    private Days selectedProp = 0;
+    private string selectedProp = "";
+    List<Product> ProductList = new();
 
     Product Product = new()
         {
             Id = 1,
             Name = "Coffee",
             IsActive = true,
-            Price= 100,
+            Price = 100,
+            ProductProperties = new List<Models.Product_Prop>()
+            {
+                new Product_Prop{ Id =1 , Key="Color", Value="Red"},
+                new Product_Prop{ Id =2 , Key="Size", Value="20oz"},
+                new Product_Prop{ Id =3 , Key="Flavor", Value="Rose"},
+            }
+
         };
+
+    protected override void OnInitialized()
+    {
+        ProductList.Add(new()
+            {
+                Id = 1,
+                Name = "Midnight Blaze",
+                IsActive = false,
+                Price = 5.99,
+                ProductProperties = new List<Product_Prop>()
+                {
+                    new Product_Prop { Id = 1, Key = "Flavor", Value = "Rose"},
+                    new Product_Prop { Id = 2, Key = "Size", Value = "20oz"},
+                    new Product_Prop { Id = 3, Key = "Color", Value="Purple" }
+                }
+            });
+
+        ProductList.Add(new()
+            {
+                Id = 2,
+                Name = "Blossom Lily",
+                IsActive = true,
+                Price = 10.59,
+                ProductProperties = new List<Product_Prop>()
+                {
+                    new Product_Prop { Id = 1, Key = "Flavor", Value = "Lily" },
+                    new Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
+                    new Product_Prop {Id = 3,Key = "Color",Value = "White"}
+                }
+            });
+
+    }
 
 }
 

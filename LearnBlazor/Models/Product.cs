@@ -6,22 +6,6 @@
         public string Name { get; set; }
         public double Price { get; set; }
         public bool IsActive { get; set; }
-        public Days ProductProperties {  get; set; }
-
+        public IEnumerable<Product_Prop> ProductProperties { get; set; }
     }
-
-    public enum Days 
-    {
-        None,
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday,
-        Weekend
-    }
-
-
 }
