@@ -15,7 +15,7 @@
         }
     }
     <br />
-    <DeleteButtonComponent ProductId="@prod.Id">
+    <DeleteButtonComponent ProductId="@prod.Id" OnDeleted="OnRemove">
 
     </DeleteButtonComponent>
 
@@ -28,11 +28,14 @@
     [Parameter]
     public EventCallback<bool> OnFavoriteUpdated { get; set; } //มาจากแม่
 
+    [Parameter]
+    public EventCallback<int> OnRemove { get; set; } //มาจากแม่
+
 
     private async Task FavoriteUpdated(ChangeEventArgs args) //ลูก
     {
         await OnFavoriteUpdated.InvokeAsync((bool)(args.Value ?? false));
     }
-
+     
 
 }
