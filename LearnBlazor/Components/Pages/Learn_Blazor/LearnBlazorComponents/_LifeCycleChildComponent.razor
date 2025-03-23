@@ -1,0 +1,17 @@
+﻿<hr />
+@foreach (var item in EventType)
+{
+    @item
+    <hr />
+}
+
+@code {
+    List<string> EventType = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        EventType.Add("เริ่มต้นทำงานที่ ลูก");
+    }
+
+}

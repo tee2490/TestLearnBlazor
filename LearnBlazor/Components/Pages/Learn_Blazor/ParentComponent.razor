@@ -2,7 +2,10 @@
 
 <h3>ParentComponent</h3>
 
-<CascadingValue Value="@MessageForGrandChildTemp">
+
+<CascadingValue Value="@MessageForGrandChildTemp" Name="Message">
+    <CascadingValue Value="@LuckyNumber" Name="LuckyNumber">
+
 <_ChildComponent OnButtonClick="
 ShowMessage" Title="This title is passed as a parameter from Parent Component">
     
@@ -14,6 +17,8 @@ ShowMessage" Title="This title is passed as a parameter from Parent Component">
     </ChildContent>
 </_ChildComponent>
 </CascadingValue>
+</CascadingValue>
+
 
 <p>@messageText</p>
 
@@ -23,6 +28,7 @@ ShowMessage" Title="This title is passed as a parameter from Parent Component">
 
 
 @code {
+    private string LuckyNumber = "77777";
     private string MessageForGrandChildTemp = "ข้อความนี้ส่งจาก Parent Component to Grand Child";
     public string messageText = "";
 
